@@ -11,7 +11,8 @@ namespace Exercise_Linked_List_A
         /*creates Nodes for the circular nexted list*/
         public int rollNumber;
         public string name;
-        public Node next;
+        public Node next; 
+        public Node prev;
     }
     class CircularList
     {
@@ -33,6 +34,30 @@ namespace Exercise_Linked_List_A
                 return true;
             else
                 return (false);/*returns false if the node is not found*/
+        }
+        public bool delNode(int rollNo)/*Deletes the specified node*/
+        {
+            Node previous, current;
+            previous = current = null;
+            if (Search(rollNo, ref previous, ref current) == false)
+                return false;
+            if (current == LAST)/*if the first node is to be deleted*/
+            {
+                LAST = LAST.next;
+                if (LAST != null)
+                    LAST.prev = null;
+                return true;
+            }
+            if (current.next == null)/*if the last node is to be deleted*/
+            {
+                previous.next = null;
+                return true;
+            }
+            /*If the node to be deleted is in between the list then the 
+              following lines of cbde is executed.*/
+            previous.next = current.next;
+            current.next.prev = previous;
+            return true;
         }
         public bool listEmpty()
         {
@@ -78,8 +103,9 @@ namespace Exercise_Linked_List_A
                     Console.WriteLine("1. View all the records in the list");
                     Console.WriteLine("2. Search for a record in the list");
                     Console.WriteLine("3. Display the first record in the list");
-                    Console.WriteLine("4 Exit");
-                    Console.Write("\nEnter your choice (1-4) : ");
+                    Console.WriteLine("4. Delete a record from the list");
+                    Console.WriteLine("5. Exit");
+                    Console.Write("\nEnter your choice (1-5) : ");
                     char ch = Convert.ToChar(Console.ReadLine());
                     switch (ch)
                     {
@@ -116,6 +142,23 @@ namespace Exercise_Linked_List_A
                             }
                             break ;
                         case '4':
+                            {
+                                if (obj.listEmpty())
+                                {
+                                    Console.WriteLine("\nList is empty");
+                                    break;
+                                }
+                                Console.Write("\nEnter the roll number of the student" +
+                                    " whose record is to be deleted: ");
+                                int rollNo = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine();
+                                if (obj.delNode(rollNo) == false)
+                                    Console.WriteLine("Record not found");
+                                else
+                                    Console.WriteLine("Record will roll number " + rollNo + " deleted \n");
+                            }
+                            break;
+                        case '5':
                             return;
                         default:
                             {
