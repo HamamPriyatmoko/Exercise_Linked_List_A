@@ -11,8 +11,8 @@ namespace Exercise_Linked_List_A
         /*creates Nodes for the circular nexted list*/
         public int rollNumber;
         public string name;
-        public Node next; 
-        public Node prev;
+        public Node next;/*points to the succeding node*/ 
+        public Node prev;/*points to the preceeding node*/
     }
     class CircularList
     {
