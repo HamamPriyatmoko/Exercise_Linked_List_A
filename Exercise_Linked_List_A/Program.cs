@@ -15,7 +15,12 @@ namespace Exercise_Linked_List_A
     }
     class CircularList
     {
-        Node Last;
+        Node LAST;
+        public CircularList()
+        {
+            LAST = null;
+
+        }
     }
     internal class Program
     {
